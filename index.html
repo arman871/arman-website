@@ -1,35 +1,583 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aivonex Technologies - IT Solutions & Internship Programs</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0284c7" />
+    
+    <title>Aivonex Technologies | Elevate Your Career</title>
+    <meta name="description" content="The ultimate student ecosystem. Virtual internships, Online Compiler, Tutorials, and Interview Prep all in one place." />
+    <meta name="keywords" content="Aivonex, Internships, Coding, Online Compiler, Interview Prep, DSA, Web Development, EdTech" />
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 60px 0;
+            background: var(--light);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border: 2px solid var(--light);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(2, 132, 199, 0.15);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-icon i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        /* Programs Section */
+        .programs {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .program-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .program-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .program-image i {
+            font-size: 5rem;
+            color: var(--white);
+        }
+        
+        .program-content {
+            padding: 2rem;
+        }
+        
+        .program-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .program-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .program-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .program-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .program-meta i {
+            color: var(--primary);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .btn-white {
+            background: var(--white);
+            color: var(--primary);
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+        }
+        
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-about h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-about p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-bottom p {
+            color: var(--gray);
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-bottom-links a {
+            color: var(--gray);
+            text-decoration: none;
+        }
+        
+        .footer-bottom-links a:hover {
+            color: var(--white);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-grid,
+            .features-grid,
+            .programs-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">
-                <i class="fas fa-robot"></i>
-                <span>Arman<span class="highlight">Tech</span></span>
+                <i class="fas fa-code"></i>
+                Aivonex
             </a>
+            
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Home</a></li>
-                <li><a href="pages/about.html">About</a></li>
-                <li><a href="#services">Services</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#programs">Programs</a></li>
                 <li><a href="#internships">Internships</a></li>
-                <li><a href="pages/courses.html">Courses</a></li>
-                <li><a href="pages/payment.html">Payment</a></li>
-                <li><a href="pages/refer.html">Refer & Earn</a></li>
-                <li><a href="pages/contact.html">Contact</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            
             <div class="nav-buttons">
-                <a href="pages/login.html" class="btn-login">Login</a>
-                <a href="pages/signup.html" class="btn-register">Register</a>
+                <a href="pages/login.html" class="btn btn-outline">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="pages/signup.html" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
             </div>
-            <div class="hamburger" id="hamburger">
+            
+            <div class="mobile-toggle" id="mobileToggle">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -39,960 +587,346 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-overlay"></div>
         <div class="container hero-content">
-            <h1 class="hero-title">
-                Maximize Your Potential With <span class="highlight">Technology</span> Today!
-            </h1>
-            <p class="hero-subtitle">
-                Your Vision, Our Design – Aivonex Technologies creates innovative IT solutions and provides 
-                industry-ready training to shape your future career.
-            </p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <i class="fas fa-globe"></i>
-                    <span class="stat-number" data-count="27">0</span>+
-                    <span class="stat-label">Countries Served</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <span class="stat-number" data-count="17500">0</span>+
-                    <span class="stat-label">Students Trained</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-certificate"></i>
-                    <span class="stat-number" data-count="16800">0</span>+
-                    <span class="stat-label">Certifications Issued</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <span class="stat-number" data-count="100">0</span>+
-                    <span class="stat-label">Expert Instructors</span>
-                </div>
-            </div>
+            <h1>Elevate Your Career with Aivonex</h1>
+            <p>The ultimate student ecosystem. Virtual internships, Online Compiler, Tutorials, and Interview Prep all in one place.</p>
             <div class="hero-buttons">
-                <a href="#internships" class="btn-primary">
-                    <i class="fas fa-rocket"></i> Explore Internships
+                <a href="pages/signup.html" class="btn btn-white btn-hero">
+                    <i class="fas fa-rocket"></i> Get Started Free
                 </a>
-                <a href="#services" class="btn-secondary">
-                    <i class="fas fa-briefcase"></i> Our Services
+                <a href="#programs" class="btn btn-outline btn-hero" style="border-color: white; color: white;">
+                    <i class="fas fa-play-circle"></i> Explore Programs
                 </a>
-                <a href="#documents" class="btn-outline">
-                    <i class="fas fa-file-download"></i> Get Certificate
-                </a>
-            </div>
-            <div class="trust-badges">
-                <span><i class="fas fa-check-circle"></i> AICTE Certified</span>
-                <span><i class="fas fa-check-circle"></i> ISO 9001:2015</span>
-                <span><i class="fas fa-check-circle"></i> MSME Registered</span>
-                <span><i class="fas fa-check-circle"></i> Google Education Partner</span>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- Stats Section -->
+    <section class="stats">
         <div class="container">
-            <div class="about-grid">
-                <div class="about-content">
-                    <h2 class="section-title">About <span class="highlight">Arman</span></h2>
-                    <p class="about-text">
-                        Aivonex Technologies is a leading IT solutions provider and educational platform 
-                        dedicated to bridging the gap between academic learning and industry 
-                        requirements. We offer comprehensive internship programs, professional 
-                        training, and cutting-edge technology solutions.
-                    </p>
-                    <div class="mission-vision">
-                        <div class="mv-card">
-                            <i class="fas fa-bullseye"></i>
-                            <h3>Our Mission</h3>
-                            <p>To empower students and professionals with industry-relevant skills 
-                            and provide innovative IT solutions to businesses worldwide.</p>
-                        </div>
-                        <div class="mv-card">
-                            <i class="fas fa-eye"></i>
-                            <h3>Our Vision</h3>
-                            <p>To become the global leader in IT education and technology solutions, 
-                            creating a skilled workforce for the digital future.</p>
-                        </div>
-                    </div>
-                    <div class="about-features">
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Industry Expert Mentors</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>100% Placement Assistance</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>24/7 Student Support</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-check"></i>
-                            <span>Lifetime Access to Materials</span>
-                        </div>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" data-count="10000">0</span>+
+                    <span class="stat-label">Active Students</span>
                 </div>
-                <div class="about-image">
-                    <div class="image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600" alt="Team collaboration">
-                    </div>
-                    <div class="experience-badge">
-                        <span class="years">5+</span>
-                        <span class="text">Years Experience</span>
-                    </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-count="500">0</span>+
+                    <span class="stat-label">Internships</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-count="100">0</span>+
+                    <span class="stat-label">Companies</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-count="95">0</span>%
+                    <span class="stat-label">Success Rate</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <!-- Features Section -->
+    <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title text-center">Our <span class="highlight">Services</span></h2>
-            <p class="section-subtitle text-center">Comprehensive IT solutions for businesses and students</p>
+            <div class="section-header">
+                <h2>Why Choose Aivonex?</h2>
+                <p>Everything you need to succeed in your tech career</p>
+            </div>
             
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-laptop-code"></i>
                     </div>
-                    <h3>Web Development</h3>
-                    <p>Custom websites, web applications, and e-commerce solutions built with 
-                    modern technologies like React, Node.js, and Python.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Responsive Design</li>
-                        <li><i class="fas fa-check"></i> E-commerce Solutions</li>
-                        <li><i class="fas fa-check"></i> CMS Development</li>
-                    </ul>
-                    <a href="#contact" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <h3>Virtual Internships</h3>
+                    <p>Gain real-world experience with industry projects from top companies. Work remotely and build your portfolio.</p>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-code"></i>
                     </div>
-                    <h3>Mobile Apps</h3>
-                    <p>Native and cross-platform mobile applications for iOS and Android 
-                    with seamless user experience and performance.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> iOS & Android</li>
-                        <li><i class="fas fa-check"></i> Flutter & React Native</li>
-                        <li><i class="fas fa-check"></i> App Maintenance</li>
-                    </ul>
-                    <a href="#contact" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <h3>Online Compiler</h3>
+                    <p>Code, compile, and execute in multiple languages directly in your browser. No setup required.</p>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Student Internships</h3>
-                    <p>Industry-focused internship programs with hands-on training, 
-                    real projects, and certification upon completion.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Live Projects</li>
-                        <li><i class="fas fa-check"></i> Expert Mentorship</li>
-                        <li><i class="fas fa-check"></i> Placement Support</li>
-                    </ul>
-                    <a href="#internships" class="btn-service">Explore Programs <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
-                    <h3>Industrial Training</h3>
-                    <p>Comprehensive training programs designed to make you industry-ready 
-                    with practical skills and real-world experience.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> 450GB+ Study Material</li>
-                        <li><i class="fas fa-check"></i> 50+ Technology Courses</li>
-                        <li><i class="fas fa-check"></i> Hands-on Projects</li>
-                    </ul>
-                    <a href="#courses" class="btn-service">View Courses <i class="fas fa-arrow-right"></i></a>
+                    <h3>Expert Tutorials</h3>
+                    <p>Learn from industry experts with curated tutorials covering DSA, Web Dev, App Dev, and more.</p>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3>Digital Marketing</h3>
-                    <p>Strategic digital marketing solutions to grow your business online 
-                    with SEO, social media, and paid advertising.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> SEO Optimization</li>
-                        <li><i class="fas fa-check"></i> Social Media Marketing</li>
-                        <li><i class="fas fa-check"></i> PPC Campaigns</li>
-                    </ul>
-                    <a href="#contact" class="btn-service">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>24/7 Support</h3>
-                    <p>Round-the-clock technical support and maintenance services 
-                    to keep your systems running smoothly.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Technical Support</li>
-                        <li><i class="fas fa-check"></i> System Maintenance</li>
-                        <li><i class="fas fa-check"></i> Emergency Assistance</li>
-                    </ul>
-                    <a href="#contact" class="btn-service">Get Support <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Internships Section -->
-    <section class="internships" id="internships">
-        <div class="container">
-            <h2 class="section-title text-center">Internship <span class="highlight">Programs</span></h2>
-            <p class="section-subtitle text-center">Choose from our industry-recognized internship programs</p>
-
-            <div class="internship-grid">
-                <div class="internship-card featured">
-                    <div class="badge">Bestseller</div>
-                    <div class="card-header">
-                        <i class="fas fa-code"></i>
-                        <h3>Web Development</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="duration">
-                            <i class="fas fa-clock"></i> 2-6 Months
-                        </div>
-                        <div class="mode">
-                            <i class="fas fa-laptop"></i> Online / Offline
-                        </div>
-                        <ul class="internship-features">
-                            <li><i class="fas fa-check-circle"></i> HTML, CSS, JavaScript</li>
-                            <li><i class="fas fa-check-circle"></i> React, Node.js</li>
-                            <li><i class="fas fa-check-circle"></i> MongoDB, Express</li>
-                            <li><i class="fas fa-check-circle"></i> Live Projects</li>
-                            <li><i class="fas fa-check-circle"></i> Certificate Included</li>
-                        </ul>
-                        <div class="pricing">
-                            <span class="original-price">₹1,499</span>
-                            <span class="discounted-price">₹99</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(4.8/5 from 2,450 reviews)</span>
-                        </div>
-                        <a href="#payment" class="btn-enroll">Enroll Now</a>
-                    </div>
-                </div>
-
-                <div class="internship-card">
-                    <div class="card-header">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h3>App Development</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="duration">
-                            <i class="fas fa-clock"></i> 2-6 Months
-                        </div>
-                        <div class="mode">
-                            <i class="fas fa-laptop"></i> Online / Offline
-                        </div>
-                        <ul class="internship-features">
-                            <li><i class="fas fa-check-circle"></i> Flutter / React Native</li>
-                            <li><i class="fas fa-check-circle"></i> iOS & Android</li>
-                            <li><i class="fas fa-check-circle"></i> Firebase Integration</li>
-                            <li><i class="fas fa-check-circle"></i> UI/UX Design</li>
-                            <li><i class="fas fa-check-circle"></i> Certificate Included</li>
-                        </ul>
-                        <div class="pricing">
-                            <span class="original-price">₹1,499</span>
-                            <span class="discounted-price">₹99</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(4.9/5 from 1,890 reviews)</span>
-                        </div>
-                        <a href="#payment" class="btn-enroll">Enroll Now</a>
-                    </div>
-                </div>
-
-                <div class="internship-card">
-                    <div class="card-header">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-brain"></i>
-                        <h3>Data Science</h3>
                     </div>
-                    <div class="card-body">
-                        <div class="duration">
-                            <i class="fas fa-clock"></i> 2-6 Months
-                        </div>
-                        <div class="mode">
-                            <i class="fas fa-laptop"></i> Online / Offline
-                        </div>
-                        <ul class="internship-features">
-                            <li><i class="fas fa-check-circle"></i> Python, R Programming</li>
-                            <li><i class="fas fa-check-circle"></i> Machine Learning</li>
-                            <li><i class="fas fa-check-circle"></i> Data Visualization</li>
-                            <li><i class="fas fa-check-circle"></i> Real-world Projects</li>
-                            <li><i class="fas fa-check-circle"></i> Certificate Included</li>
-                        </ul>
-                        <div class="pricing">
-                            <span class="original-price">₹1,499</span>
-                            <span class="discounted-price">₹99</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(4.7/5 from 1,560 reviews)</span>
-                        </div>
-                        <a href="#payment" class="btn-enroll">Enroll Now</a>
-                    </div>
+                    <h3>Interview Prep</h3>
+                    <p>Crack your dream job with curated interview questions, mock interviews, and preparation guides.</p>
                 </div>
-
-                <div class="internship-card">
-                    <div class="card-header">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3>Cyber Security</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="duration">
-                            <i class="fas fa-clock"></i> 2-6 Months
-                        </div>
-                        <div class="mode">
-                            <i class="fas fa-laptop"></i> Online / Offline
-                        </div>
-                        <ul class="internship-features">
-                            <li><i class="fas fa-check-circle"></i> Ethical Hacking</li>
-                            <li><i class="fas fa-check-circle"></i> Network Security</li>
-                            <li><i class="fas fa-check-circle"></i> Penetration Testing</li>
-                            <li><i class="fas fa-check-circle"></i> Security Tools</li>
-                            <li><i class="fas fa-check-circle"></i> Certificate Included</li>
-                        </ul>
-                        <div class="pricing">
-                            <span class="original-price">₹1,499</span>
-                            <span class="discounted-price">₹99</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(4.9/5 from 1,230 reviews)</span>
-                        </div>
-                        <a href="#payment" class="btn-enroll">Enroll Now</a>
-                    </div>
-                </div>
-
-                <div class="internship-card">
-                    <div class="card-header">
-                        <i class="fas fa-paint-brush"></i>
-                        <h3>UI/UX Design</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="duration">
-                            <i class="fas fa-clock"></i> 2-6 Months
-                        </div>
-                        <div class="mode">
-                            <i class="fas fa-laptop"></i> Online / Offline
-                        </div>
-                        <ul class="internship-features">
-                            <li><i class="fas fa-check-circle"></i> Figma, Adobe XD</li>
-                            <li><i class="fas fa-check-circle"></i> Wireframing</li>
-                            <li><i class="fas fa-check-circle"></i> Prototyping</li>
-                            <li><i class="fas fa-check-circle"></i> User Research</li>
-                            <li><i class="fas fa-check-circle"></i> Certificate Included</li>
-                        </ul>
-                        <div class="pricing">
-                            <span class="original-price">₹1,499</span>
-                            <span class="discounted-price">₹99</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(4.8/5 from 980 reviews)</span>
-                        </div>
-                        <a href="#payment" class="btn-enroll">Enroll Now</a>
-                    </div>
-                </div>
-
-                <div class="internship-card">
-                    <div class="card-header">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Digital Marketing</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="duration">
-                            <i class="fas fa-clock"></i> 2-6 Months
-                        </div>
-                        <div class="mode">
-                            <i class="fas fa-laptop"></i> Online / Offline
-                        </div>
-                        <ul class="internship-features">
-                            <li><i class="fas fa-check-circle"></i> SEO & SEM</li>
-                            <li><i class="fas fa-check-circle"></i> Social Media</li>
-                            <li><i class="fas fa-check-circle"></i> Content Marketing</li>
-                            <li><i class="fas fa-check-circle"></i> Analytics</li>
-                            <li><i class="fas fa-check-circle"></i> Certificate Included</li>
-                        </ul>
-                        <div class="pricing">
-                            <span class="original-price">₹1,499</span>
-                            <span class="discounted-price">₹99</span>
-                        </div>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(4.9/5 from 1,450 reviews)</span>
-                        </div>
-                        <a href="#payment" class="btn-enroll">Enroll Now</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="internship-benefits">
-                <h3>Why Choose Our Internships?</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-item">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-certificate"></i>
-                        <span>AICTE Certified Programs</span>
                     </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-user-tie"></i>
-                        <span>Industry Expert Mentors</span>
+                    <h3>Certifications</h3>
+                    <p>Earn industry-recognized certificates upon completion. Showcase your skills to employers.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Placement Assistance</span>
-                    </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-infinity"></i>
-                        <span>Lifetime Access</span>
-                    </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-headset"></i>
-                        <span>24/7 Student Support</span>
-                    </div>
-                    <div class="benefit-item">
-                        <i class="fas fa-undo"></i>
-                        <span>100% Refund Guarantee</span>
-                    </div>
+                    <h3>Community Support</h3>
+                    <p>Join our thriving community of learners. Get help, share knowledge, and grow together.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment Section -->
-    <section class="payment" id="payment">
+    <!-- Programs Section -->
+    <section class="programs" id="programs">
         <div class="container">
-            <h2 class="section-title text-center">Secure <span class="highlight">Payment</span></h2>
-            <p class="section-subtitle text-center">Choose your preferred payment method to enroll</p>
-
-            <div class="payment-grid">
-                <div class="payment-card">
-                    <div class="payment-icon upi">
+            <div class="section-header">
+                <h2>Our Programs</h2>
+                <p>Choose from our wide range of industry-focused programs</p>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Web Development</h3>
+                        <p>Master modern web technologies including HTML, CSS, JavaScript, React, Node.js, and MongoDB. Build real-world projects.</p>
+                        <div class="program-meta">
+                            <span><i class="fas fa-clock"></i> 3-6 Months</span>
+                            <span><i class="fas fa-signal"></i> Beginner to Advanced</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <a href="pages/courses.html" class="btn btn-primary">
+                            Enroll Now <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-image" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>UPI Payment</h3>
-                    <p>Scan QR or use UPI ID</p>
-                    <div class="qr-code">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=armantechnologie@paytm" alt="UPI QR Code">
-                    </div>
-                    <div class="upi-id">
-                        <strong>UPI ID:</strong>
-                        <code>armantechnologie@paytm</code>
-                    </div>
-                    <div class="payment-apps">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI_Logo_vector.svg" alt="UPI" height="40">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Google_Pay_Logo_%282020%29.svg" alt="GPay" height="40">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Paytm_logo_072019.png" alt="Paytm" height="40">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/PhonePe_Logo.svg" alt="PhonePe" height="40">
-                    </div>
-                    <button class="btn-pay" onclick="showPaymentModal('UPI')">
-                        <i class="fas fa-check-circle"></i> I Have Paid
-                    </button>
-                </div>
-
-                <div class="payment-card">
-                    <div class="payment-icon card">
-                        <i class="fas fa-credit-card"></i>
-                    </div>
-                    <h3>Card Payment</h3>
-                    <p>Credit / Debit Card</p>
-                    <div class="card-logos">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-amex"></i>
-                        <i class="fab fa-cc-rupee"></i>
-                    </div>
-                    <form class="card-form" id="cardForm">
-                        <input type="text" placeholder="Card Number" maxlength="19">
-                        <input type="text" placeholder="Cardholder Name">
-                        <div class="card-details">
-                            <input type="text" placeholder="MM/YY" maxlength="5">
-                            <input type="text" placeholder="CVV" maxlength="3">
+                    <div class="program-content">
+                        <h3>App Development</h3>
+                        <p>Learn to build cross-platform mobile apps using Flutter and React Native. Deploy to Play Store and App Store.</p>
+                        <div class="program-meta">
+                            <span><i class="fas fa-clock"></i> 3-6 Months</span>
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
                         </div>
-                        <button type="submit" class="btn-pay">
-                            <i class="fas fa-lock"></i> Pay Securely
-                        </button>
-                    </form>
-                </div>
-
-                <div class="payment-card">
-                    <div class="payment-icon bank">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3>Bank Transfer</h3>
-                    <p>Direct Bank Transfer</p>
-                    <div class="bank-details">
-                        <p><strong>Account Name:</strong> Aivonex Technologies</p>
-                        <p><strong>Account No:</strong> XXXXXXXXXXXX</p>
-                        <p><strong>IFSC:</strong> XXXX0XXXXXX</p>
-                        <p><strong>Bank:</strong> XXXXX Bank</p>
-                        <p><strong>Branch:</strong> XXXXX Branch</p>
-                    </div>
-                    <button class="btn-pay" onclick="showPaymentModal('Bank Transfer')">
-                        <i class="fas fa-check-circle"></i> I Have Paid
-                    </button>
-                </div>
-            </div>
-
-            <div class="payment-security">
-                <div class="security-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>100% Secure Payment</span>
-                </div>
-                <div class="security-item">
-                    <i class="fas fa-lock"></i>
-                    <span>SSL Encrypted</span>
-                </div>
-                <div class="security-item">
-                    <i class="fas fa-undo"></i>
-                    <span>Easy Refunds</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Documents Section (Certificate/LOR/Offer Letter Generator) -->
-    <section class="documents" id="documents">
-        <div class="container">
-            <h2 class="section-title text-center">Document <span class="highlight">Generator</span></h2>
-            <p class="section-subtitle text-center">Generate your Certificate, LOR, or Offer Letter instantly</p>
-
-            <div class="document-tabs">
-                <button class="tab-btn active" data-tab="certificate">
-                    <i class="fas fa-certificate"></i> Certificate
-                </button>
-                <button class="tab-btn" data-tab="lor">
-                    <i class="fas fa-file-signature"></i> LOR
-                </button>
-                <button class="tab-btn" data-tab="offer">
-                    <i class="fas fa-briefcase"></i> Offer Letter
-                </button>
-            </div>
-
-            <!-- Certificate Form -->
-            <div class="document-form active" id="certificate-form">
-                <div class="form-container">
-                    <h3><i class="fas fa-certificate"></i> Generate Internship Certificate</h3>
-                    <form id="generateCertificate">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Student Name</label>
-                                <input type="text" id="certName" placeholder="Enter full name" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Course/Program</label>
-                                <select id="certCourse" required>
-                                    <option value="">Select Program</option>
-                                    <option value="Web Development">Web Development</option>
-                                    <option value="App Development">App Development</option>
-                                    <option value="Data Science">Data Science</option>
-                                    <option value="Cyber Security">Cyber Security</option>
-                                    <option value="UI/UX Design">UI/UX Design</option>
-                                    <option value="Digital Marketing">Digital Marketing</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Duration (Months)</label>
-                                <input type="number" id="certDuration" placeholder="e.g., 3" min="1" max="12" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Completion Date</label>
-                                <input type="date" id="certDate" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Registration ID</label>
-                                <input type="text" id="certId" placeholder="e.g., AIVX/2026/001" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Grade/Performance</label>
-                                <select id="certGrade" required>
-                                    <option value="">Select Grade</option>
-                                    <option value="A+ (Excellent)">A+ (Excellent)</option>
-                                    <option value="A (Very Good)">A (Very Good)</option>
-                                    <option value="B+ (Good)">B+ (Good)</option>
-                                    <option value="B (Satisfactory)">B (Satisfactory)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-generate">
-                            <i class="fas fa-download"></i> Generate Certificate PDF
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- LOR Form -->
-            <div class="document-form" id="lor-form">
-                <div class="form-container">
-                    <h3><i class="fas fa-file-signature"></i> Generate Letter of Recommendation</h3>
-                    <form id="generateLOR">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Student Name</label>
-                                <input type="text" id="lorName" placeholder="Enter full name" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Course/Program</label>
-                                <select id="lorCourse" required>
-                                    <option value="">Select Program</option>
-                                    <option value="Web Development">Web Development</option>
-                                    <option value="App Development">App Development</option>
-                                    <option value="Data Science">Data Science</option>
-                                    <option value="Cyber Security">Cyber Security</option>
-                                    <option value="UI/UX Design">UI/UX Design</option>
-                                    <option value="Digital Marketing">Digital Marketing</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Duration (Months)</label>
-                                <input type="number" id="lorDuration" placeholder="e.g., 3" min="1" max="12" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Date of Issue</label>
-                                <input type="date" id="lorDate" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Registration ID</label>
-                                <input type="text" id="lorId" placeholder="e.g., AIVX/2026/001" required>
-                            </div>
-                            <div class="form-group">
-                                <label>For Purpose</label>
-                                <select id="lorPurpose" required>
-                                    <option value="">Select Purpose</option>
-                                    <option value="Higher Studies">Higher Studies</option>
-                                    <option value="Job Application">Job Application</option>
-                                    <option value="Visa Application">Visa Application</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-generate">
-                            <i class="fas fa-download"></i> Generate LOR PDF
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Offer Letter Form -->
-            <div class="document-form" id="offer-form">
-                <div class="form-container">
-                    <h3><i class="fas fa-briefcase"></i> Generate Offer Letter</h3>
-                    <form id="generateOffer">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Student Name</label>
-                                <input type="text" id="offerName" placeholder="Enter full name" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Position/Role</label>
-                                <select id="offerRole" required>
-                                    <option value="">Select Position</option>
-                                    <option value="Web Developer Intern">Web Developer Intern</option>
-                                    <option value="App Developer Intern">App Developer Intern</option>
-                                    <option value="Data Science Intern">Data Science Intern</option>
-                                    <option value="Cyber Security Intern">Cyber Security Intern</option>
-                                    <option value="UI/UX Design Intern">UI/UX Design Intern</option>
-                                    <option value="Digital Marketing Intern">Digital Marketing Intern</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Stipend (₹)</label>
-                                <input type="number" id="offerStipend" placeholder="e.g., 10000" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Start Date</label>
-                                <input type="date" id="offerStartDate" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Duration (Months)</label>
-                                <input type="number" id="offerDuration" placeholder="e.g., 6" min="1" max="12" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Offer Date</label>
-                                <input type="date" id="offerDate" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-generate">
-                            <i class="fas fa-download"></i> Generate Offer Letter PDF
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="document-info">
-                <div class="info-box">
-                    <i class="fas fa-info-circle"></i>
-                    <div>
-                        <h4>Instant Download</h4>
-                        <p>Documents are generated instantly and downloaded as PDF</p>
+                        <a href="pages/courses.html" class="btn btn-primary">
+                            Enroll Now <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="info-box">
-                    <i class="fas fa-shield-alt"></i>
-                    <div>
-                        <h4>Digitally Signed</h4>
-                        <p>All documents include digital signature and company seal</p>
+                
+                <div class="program-card">
+                    <div class="program-image" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Data Science</h3>
+                        <p>Dive into Python, SQL, Machine Learning, and Data Visualization. Work on real datasets and build predictive models.</p>
+                        <div class="program-meta">
+                            <span><i class="fas fa-clock"></i> 4-8 Months</span>
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <a href="pages/courses.html" class="btn btn-primary">
+                            Enroll Now <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="info-box">
-                    <i class="fas fa-check-circle"></i>
-                    <div>
-                        <h4>Verified Documents</h4>
-                        <p>Each document has a unique verification ID</p>
+                
+                <div class="program-card">
+                    <div class="program-image" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3>Cyber Security</h3>
+                        <p>Learn ethical hacking, network security, and penetration testing. Become a certified security professional.</p>
+                        <div class="program-meta">
+                            <span><i class="fas fa-clock"></i> 4-6 Months</span>
+                            <span><i class="fas fa-signal"></i> Advanced</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <a href="pages/courses.html" class="btn btn-primary">
+                            Enroll Now <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <!-- CTA Section -->
+    <section class="cta">
         <div class="container">
-            <h2 class="section-title text-center">Get In <span class="highlight">Touch</span></h2>
-            <p class="section-subtitle text-center">Have questions? We'd love to hear from you</p>
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Join thousands of students who are already learning and growing with Aivonex</p>
+            <a href="pages/signup.html" class="btn btn-white btn-hero">
+                <i class="fas fa-user-plus"></i> Create Free Account
+            </a>
+        </div>
+    </section>
 
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="info-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Our Location</h4>
-                            <p>123 Tech Park, Sector 5<br>Bangalore, Karnataka 560001<br>India</p>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <h4>Call Us</h4>
-                            <p><a href="tel:+917307967581">+91 73079 67581</a></p>
-                            <p><a href="tel:+919876543210">+91 98765 43210</a></p>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email Us</h4>
-                            <p><a href="mailto:armantechnologie@gmail.com">armantechnologie@gmail.com</a></p>
-                            <p><a href="mailto:support@arman.com">support@arman.com</a></p>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h4>Business Hours</h4>
-                            <p>Mon - Sat: 9:00 AM - 6:00 PM<br>Sunday: Closed</p>
-                        </div>
-                    </div>
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>
+                        <i class="fas fa-code"></i>
+                        Aivonex
+                    </h3>
+                    <p>The ultimate student ecosystem for learning, internships, and career growth. Join us today and elevate your career.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <h3>Send us a Message</h3>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Phone Number" required>
-                        </div>
-                        <div class="form-group">
-                            <select required>
-                                <option value="">Select Program</option>
-                                <option value="web">Web Development</option>
-                                <option value="app">App Development</option>
-                                <option value="data">Data Science</option>
-                                <option value="cyber">Cyber Security</option>
-                                <option value="ui">UI/UX Design</option>
-                                <option value="marketing">Digital Marketing</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">
-                            Send Message <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <a href="#" class="footer-logo">
-                        <i class="fas fa-robot"></i>
-                        <span>Arman<span class="highlight">Tech</span></span>
-                    </a>
-                    <p>Empowering students and businesses with cutting-edge technology 
-                    solutions and industry-ready training programs.</p>
-                    <div class="payment-methods">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-amex"></i>
-                        <i class="fab fa-google-pay"></i>
-                        <i class="fas fa-qrcode"></i>
-                    </div>
-                </div>
+                
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="pages/about.html">About Us</a></li>
-                        <li><a href="#services">Services</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#programs">Programs</a></li>
                         <li><a href="#internships">Internships</a></li>
-                        <li><a href="pages/courses.html">Courses</a></li>
-                        <li><a href="pages/payment.html">Payment</a></li>
-                        <li><a href="pages/refer.html">Refer & Earn</a></li>
-                        <li><a href="pages/contact.html">Contact</a></li>
+                        <li><a href="pages/login.html">Login</a></li>
+                        <li><a href="pages/signup.html">Sign Up</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-links">
                     <h4>Programs</h4>
                     <ul>
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">App Development</a></li>
-                        <li><a href="#">Data Science</a></li>
-                        <li><a href="#">Cyber Security</a></li>
-                        <li><a href="#">Digital Marketing</a></li>
+                        <li><a href="pages/courses.html">Web Development</a></li>
+                        <li><a href="pages/courses.html">App Development</a></li>
+                        <li><a href="pages/courses.html">Data Science</a></li>
+                        <li><a href="pages/courses.html">Cyber Security</a></li>
+                        <li><a href="pages/courses.html">UI/UX Design</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-links">
                     <h4>Support</h4>
                     <ul>
+                        <li><a href="pages/contact.html">Contact Us</a></li>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
                         <li><a href="#">Refund Policy</a></li>
-                        <li><a href="#">FAQs</a></li>
+                        <li><a href="pages/refer.html">Refer & Earn</a></li>
                     </ul>
                 </div>
-                <div class="footer-newsletter">
-                    <h4>Newsletter</h4>
-                    <p>Subscribe to get latest updates and offers</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                    <div class="contact-highlight">
-                        <p><i class="fas fa-phone-alt"></i> Student Helpline:</p>
-                        <a href="tel:+917307967581">+91 73079 67581</a>
-                    </div>
-                </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2026 Aivonex Technologies. All Rights Reserved.</p>
-                <div class="footer-badges">
-                    <span>AICTE Certified</span>
-                    <span>ISO 9001:2015</span>
-                    <span>MSME Registered</span>
+                <p>&copy; 2026 Aivonex Technologies. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/917307967581" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Payment Modal -->
-    <div class="modal" id="paymentModal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h3><i class="fas fa-check-circle"></i> Payment Confirmation</h3>
-            <form id="paymentConfirmForm">
-                <div class="form-group">
-                    <label>Transaction ID / UTR Number</label>
-                    <input type="text" placeholder="Enter transaction ID" required>
-                </div>
-                <div class="form-group">
-                    <label>Payment Amount (₹)</label>
-                    <input type="number" placeholder="Enter amount" required>
-                </div>
-                <div class="form-group">
-                    <label>Payment Date</label>
-                    <input type="date" required>
-                </div>
-                <div class="form-group">
-                    <label>Upload Screenshot (Optional)</label>
-                    <input type="file" accept="image/*">
-                </div>
-                <button type="submit" class="btn-submit">Submit for Verification</button>
-            </form>
-        </div>
-    </div>
-
     <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+        
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        
+        const animateCounter = (counter) => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    counter.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        };
+        
+        const observerOptions = {
+            threshold: 0.5
+        };
+        
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
