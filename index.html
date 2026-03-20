@@ -310,6 +310,157 @@
             background: var(--light);
         }
         
+        /* Internships Section */
+        .internships {
+            padding: 100px 0;
+        }
+        
+        .internship-filters {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--light);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .internships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .internship-card {
+            background: var(--white);
+            border: 2px solid var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .internship-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(2, 132, 199, 0.15);
+        }
+        
+        .internship-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+        }
+        
+        .internship-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .internship-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .internship-body {
+            padding: 1.5rem;
+        }
+        
+        .internship-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .internship-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray);
+        }
+        
+        .internship-features i {
+            color: var(--success);
+        }
+        
+        .pricing-options {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .pricing-option:hover {
+            background: var(--white);
+        }
+        
+        .pricing-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .pricing-option .duration {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .pricing-option .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .pricing-option .price.original {
+            text-decoration: line-through;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+        
+        .btn-internship {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-internship:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .programs {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
         .programs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -769,6 +920,526 @@
         </div>
     </section>
 
+    <!-- Internships Section -->
+    <section class="internships" id="internships">
+        <div class="container">
+            <div class="section-header">
+                <h2>Virtual Internships</h2>
+                <p>Gain real-world experience with our industry-leading internship programs</p>
+            </div>
+            
+            <div class="internship-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="development">Development</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="marketing">Marketing</button>
+                <button class="filter-btn" data-filter="data">Data</button>
+            </div>
+            
+            <div class="internships-grid">
+                <!-- Web Development Internship -->
+                <div class="internship-card" data-category="development">
+                    <div class="internship-header">
+                        <h3><i class="fas fa-code"></i> Web Development</h3>
+                        <p>Build modern web applications</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> HTML, CSS, JavaScript, React</li>
+                            <li><i class="fas fa-check-circle"></i> Node.js, Express, MongoDB</li>
+                            <li><i class="fas fa-check-circle"></i> Live Projects</li>
+                            <li><i class="fas fa-check-circle"></i> Mentor Support</li>
+                            <li><i class="fas fa-check-circle"></i> Certificate Included</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- App Development Internship -->
+                <div class="internship-card" data-category="development">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                        <h3><i class="fas fa-mobile-alt"></i> App Development</h3>
+                        <p>Create cross-platform mobile apps</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> Flutter & Dart</li>
+                            <li><i class="fas fa-check-circle"></i> React Native</li>
+                            <li><i class="fas fa-check-circle"></i> Firebase Integration</li>
+                            <li><i class="fas fa-check-circle"></i> UI/UX Best Practices</li>
+                            <li><i class="fas fa-check-circle"></i> Play Store Deployment</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Science Internship -->
+                <div class="internship-card" data-category="data">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+                        <h3><i class="fas fa-chart-line"></i> Data Science</h3>
+                        <p>Analyze data and build ML models</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> Python & SQL</li>
+                            <li><i class="fas fa-check-circle"></i> Data Visualization</li>
+                            <li><i class="fas fa-check-circle"></i> Machine Learning</li>
+                            <li><i class="fas fa-check-circle"></i> Real Datasets</li>
+                            <li><i class="fas fa-check-circle"></i> Industry Projects</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cyber Security Internship -->
+                <div class="internship-card" data-category="development">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                        <h3><i class="fas fa-shield-alt"></i> Cyber Security</h3>
+                        <p>Learn ethical hacking & security</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> Network Security</li>
+                            <li><i class="fas fa-check-circle"></i> Ethical Hacking</li>
+                            <li><i class="fas fa-check-circle"></i> Penetration Testing</li>
+                            <li><i class="fas fa-check-circle"></i> Security Tools</li>
+                            <li><i class="fas fa-check-circle"></i> CEH Preparation</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- UI/UX Design Internship -->
+                <div class="internship-card" data-category="design">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #ec4899, #f59e0b);">
+                        <h3><i class="fas fa-paint-brush"></i> UI/UX Design</h3>
+                        <p>Design beautiful user interfaces</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> Figma Mastery</li>
+                            <li><i class="fas fa-check-circle"></i> Adobe XD</li>
+                            <li><i class="fas fa-check-circle"></i> Wireframing</li>
+                            <li><i class="fas fa-check-circle"></i> Prototyping</li>
+                            <li><i class="fas fa-check-circle"></i> User Research</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Digital Marketing Internship -->
+                <div class="internship-card" data-category="marketing">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">
+                        <h3><i class="fas fa-bullhorn"></i> Digital Marketing</h3>
+                        <p>Master online marketing strategies</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> SEO & SEM</li>
+                            <li><i class="fas fa-check-circle"></i> Social Media Marketing</li>
+                            <li><i class="fas fa-check-circle"></i> Google Ads</li>
+                            <li><i class="fas fa-check-circle"></i> Content Marketing</li>
+                            <li><i class="fas fa-check-circle"></i> Analytics & Reporting</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Python Programming Internship -->
+                <div class="internship-card" data-category="development">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #3776ab, #ffd343);">
+                        <h3><i class="fab fa-python"></i> Python Programming</h3>
+                        <p>Master Python from basics to advanced</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> Python Basics</li>
+                            <li><i class="fas fa-check-circle"></i> OOP & Data Structures</li>
+                            <li><i class="fas fa-check-circle"></i> File Handling</li>
+                            <li><i class="fas fa-check-circle"></i> Libraries (Pandas, NumPy)</li>
+                            <li><i class="fas fa-check-circle"></i> Mini Projects</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cloud Computing Internship -->
+                <div class="internship-card" data-category="development">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #ff9900, #232f3e);">
+                        <h3><i class="fas fa-cloud"></i> Cloud Computing (AWS)</h3>
+                        <p>Learn cloud infrastructure & deployment</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> AWS Fundamentals</li>
+                            <li><i class="fas fa-check-circle"></i> EC2, S3, Lambda</li>
+                            <li><i class="fas fa-check-circle"></i> Cloud Architecture</li>
+                            <li><i class="fas fa-check-circle"></i> Deployment Strategies</li>
+                            <li><i class="fas fa-check-circle"></i> AWS Certification Prep</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Blockchain Internship -->
+                <div class="internship-card" data-category="development">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #627eea, #f7931a);">
+                        <h3><i class="fab fa-bitcoin"></i> Blockchain Development</h3>
+                        <p>Build decentralized applications</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> Blockchain Basics</li>
+                            <li><i class="fas fa-check-circle"></i> Solidity Programming</li>
+                            <li><i class="fas fa-check-circle"></i> Smart Contracts</li>
+                            <li><i class="fas fa-check-circle"></i> Web3.js</li>
+                            <li><i class="fas fa-check-circle"></i> DApp Development</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Internship -->
+                <div class="internship-card" data-category="design">
+                    <div class="internship-header" style="background: linear-gradient(135deg, #ff6b6b, #4ecdc4);">
+                        <h3><i class="fas fa-palette"></i> Graphic Design</h3>
+                        <p>Create stunning visual content</p>
+                    </div>
+                    <div class="internship-body">
+                        <ul class="internship-features">
+                            <li><i class="fas fa-check-circle"></i> Photoshop Mastery</li>
+                            <li><i class="fas fa-check-circle"></i> Illustrator</li>
+                            <li><i class="fas fa-check-circle"></i> Logo Design</li>
+                            <li><i class="fas fa-check-circle"></i> Branding</li>
+                            <li><i class="fas fa-check-circle"></i> Portfolio Building</li>
+                        </ul>
+                        <div class="pricing-options">
+                            <div class="pricing-option">
+                                <span class="duration">14 Days</span>
+                                <div>
+                                    <span class="price original">₹99</span>
+                                    <span class="price">₹49</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">4 Weeks</span>
+                                <div>
+                                    <span class="price original">₹199</span>
+                                    <span class="price">₹99</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">8 Weeks</span>
+                                <div>
+                                    <span class="price original">₹299</span>
+                                    <span class="price">₹179</span>
+                                </div>
+                            </div>
+                            <div class="pricing-option">
+                                <span class="duration">12 Weeks</span>
+                                <div>
+                                    <span class="price original">₹399</span>
+                                    <span class="price">₹249</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-internship" onclick="window.location.href='pages/payment.html'">
+                            <i class="fas fa-rocket"></i> Start Internship
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta">
         <div class="container">
@@ -925,6 +1596,27 @@
                         });
                     }
                 }
+            });
+        });
+        
+        // Internship Filters
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const internshipCards = document.querySelectorAll('.internship-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                internshipCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
     </script>

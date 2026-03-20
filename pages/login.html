@@ -374,19 +374,32 @@
     </div>
 
     <script>
+        // Check if already logged in
+        const existingUser = JSON.parse(localStorage.getItem('aivonex_current_user'));
+        if (existingUser) {
+            window.location.href = 'dashboard.html';
+        }
+
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.querySelector('input[type="checkbox"]').checked;
             
             // Check if user exists in localStorage
             const users = JSON.parse(localStorage.getItem('aivonex_users') || '[]');
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
-                // Save current user
-                localStorage.setItem('aivonex_current_user', JSON.stringify(user));
+                // Save current user with expiry
+                const userData = {
+                    ...user,
+                    loginTime: Date.now(),
+                    expiresAt: rememberMe ? Date.now() + (30 * 24 * 60 * 60 * 1000) : Date.now() + (24 * 60 * 60 * 1000)
+                };
+                
+                localStorage.setItem('aivonex_current_user', JSON.stringify(userData));
                 
                 // Show success
                 const btn = document.querySelector('.btn-login');
@@ -395,7 +408,7 @@
                 
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
-                }, 1500);
+                }, 1000);
             } else {
                 alert('❌ Invalid email or password. Please try again or create an account.');
             }
