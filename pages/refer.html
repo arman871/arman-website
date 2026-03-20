@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refer & Earn - Arman Khan</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-wrapper { min-height: 100vh; padding: 100px 20px 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .page-container { max-width: 900px; margin: 0 auto; }
+        .page-header { text-align: center; color: white; margin-bottom: 3rem; }
+        .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.25rem; opacity: 0.9; }
+        .earn-card { background: white; border-radius: 20px; padding: 3rem; text-align: center; margin-bottom: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .earn-amount { font-size: 5rem; font-weight: 700; color: var(--success-color); margin: 1rem 0; }
+        .earn-amount span { font-size: 1.5rem; color: var(--text-secondary); }
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 3rem 0; }
+        .step-card { background: white; padding: 2rem; border-radius: 15px; text-align: center; }
+        .step-card .step-number { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; }
+        .step-card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .step-card p { color: var(--text-secondary); }
+        .referral-form { background: white; border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .referral-form h3 { color: var(--primary-color); margin-bottom: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .form-group label { display: block; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input { width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; }
+        .referral-code { background: var(--bg-light); padding: 1.5rem; border-radius: 10px; text-align: center; margin: 1.5rem 0; }
+        .referral-code .code { font-size: 2rem; font-weight: 700; color: var(--primary-color); letter-spacing: 5px; font-family: monospace; }
+        .btn-copy { padding: 0.75rem 1.5rem; background: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 1rem; }
+        .testimonials { margin-top: 3rem; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .testimonial-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 1.5rem; border-radius: 15px; color: white; }
+        .testimonial-card .stars { color: #fbbf24; margin-bottom: 1rem; }
+        .testimonial-card p { font-style: italic; margin-bottom: 1rem; }
+        .testimonial-card .name { font-weight: 600; }
+        .faq-section { background: white; border-radius: 15px; padding: 2rem; margin-top: 2rem; }
+        .faq-item { border-bottom: 1px solid var(--border-color); padding: 1.5rem 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item h4 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .faq-item p { color: var(--text-secondary); line-height: 1.6; }
+        @media (max-width: 768px) { .steps-grid, .form-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Arman<span class="highlight">Khan</span></span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="../index.html#services">Services</a></li>
+                <li><a href="../index.html#internships">Internships</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>🎉 Refer & Earn</h1>
+                <p>Invite your friends and earn up to ₹500 per referral!</p>
+            </div>
+
+            <div class="earn-card">
+                <h2>Start Earning Today</h2>
+                <div class="earn-amount">₹500 <span>per referral</span></div>
+                <p style="color: var(--text-secondary);">Refer unlimited friends and earn real cash rewards</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Get Your Code</h3>
+                    <p>Sign up and get your unique referral code</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Share & Invite</h3>
+                    <p>Share your code with friends via social media, email, or direct link</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Earn Rewards</h3>
+                    <p>Get ₹500 when your friend enrolls in any course</p>
+                </div>
+            </div>
+
+            <div class="referral-form">
+                <h3>Get Your Referral Code</h3>
+                <form id="referralForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="refName" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="refEmail" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="refPhone" placeholder="Enter your phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>College/Organization</label>
+                            <input type="text" id="refCollege" placeholder="Enter college name">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit" style="width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-ticket-alt"></i> Generate Referral Code
+                    </button>
+                </form>
+
+                <div class="referral-code" id="referralCode" style="display: none;">
+                    <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Your Referral Code</p>
+                    <div class="code" id="codeDisplay">ARMAN123</div>
+                    <button class="btn-copy" onclick="copyCode()">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                    <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.875rem;">Share this code with your friends</p>
+                </div>
+            </div>
+
+            <div class="testimonials">
+                <h2 style="color: white; text-align: center; margin-bottom: 2rem;">What Our Earners Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Earned ₹2500 by referring just 5 friends! Easy process and quick payment."</p>
+                        <div class="name">- Rahul S.</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Best referral program! Got my money within 24 hours of friend's enrollment."</p>
+                        <div class="name">- Priya M.</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Referred my whole college batch. Earned enough to pay for my own course!"</p>
+                        <div class="name">- Amit K.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h4>How much can I earn per referral?</h4>
+                    <p>You earn ₹500 for each friend who enrolls in any paid course through your referral code.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is there a limit on referrals?</h4>
+                    <p>No! You can refer unlimited friends and earn unlimited rewards.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>When do I get paid?</h4>
+                    <p>Payment is processed within 48 hours after your friend's enrollment is confirmed.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How do I receive my earnings?</h4>
+                    <p>Earnings are transferred directly to your bank account or UPI ID.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I refer myself with another account?</h4>
+                    <p>No, self-referrals are not allowed and will result in account suspension.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script>
+        document.getElementById('referralForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('refName').value;
+            const code = 'ARMAN' + Math.random().toString(36).substring(2, 6).toUpperCase();
+            document.getElementById('codeDisplay').textContent = code;
+            document.getElementById('referralCode').style.display = 'block';
+            
+            // Save referral data
+            const referrals = JSON.parse(localStorage.getItem('arman_referrals') || '[]');
+            referrals.push({ name, code, email: document.getElementById('refEmail').value, phone: document.getElementById('refPhone').value, date: new Date().toISOString() });
+            localStorage.setItem('arman_referrals', JSON.stringify(referrals));
+            
+            alert('✅ Your Referral Code Generated: ' + code);
+        });
+
+        function copyCode() {
+            const code = document.getElementById('codeDisplay').textContent;
+            navigator.clipboard.writeText(code);
+            alert('✅ Code copied: ' + code);
+        }
+    </script>
+</body>
+</html>

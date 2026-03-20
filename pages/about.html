@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Arman Khan</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-wrapper { min-height: 100vh; padding: 100px 20px 60px; background: var(--bg-light); }
+        .page-container { max-width: 1200px; margin: 0 auto; }
+        .page-header { text-align: center; margin-bottom: 3rem; }
+        .page-header h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .page-header p { color: var(--text-secondary); font-size: 1.1rem; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 3rem; }
+        .about-content h2 { color: var(--primary-color); margin-bottom: 1rem; }
+        .about-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
+        .about-image img { width: 100%; border-radius: 15px; box-shadow: var(--shadow-lg); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 3rem 0; }
+        .stat-card { background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: var(--shadow-md); }
+        .stat-card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
+        .stat-card .label { color: var(--text-secondary); font-size: 0.9rem; }
+        .team-section { text-align: center; margin: 3rem 0; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .team-card { background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: var(--shadow-md); }
+        .team-card img { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover; }
+        .team-card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .team-card p { color: var(--text-secondary); font-size: 0.9rem; }
+        @media (max-width: 768px) { .about-grid, .stats-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Arman<span class="highlight">Khan</span></span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="../index.html#services">Services</a></li>
+                <li><a href="../index.html#internships">Internships</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="page-container">
+            <div class="page-header">
+                <h1>About Arman Khan</h1>
+                <p>Empowering the next generation of tech professionals</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Who We Are</h2>
+                    <p>Arman Khan is a leading IT training and internship provider dedicated to bridging the gap between academic learning and industry requirements. We offer comprehensive training programs, live projects, and placement support to help students build successful careers in technology.</p>
+                    <p>With years of experience in the industry, we have trained thousands of students across various technologies including Web Development, App Development, Data Science, Cyber Security, and more.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600" alt="Team">
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="number" data-count="5000">0</div>
+                    <div class="label">Students Trained</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="number" data-count="500">0</div>
+                    <div class="label">Placements</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-certificate"></i>
+                    <div class="number" data-count="100">0</div>
+                    <div class="label">Certificates</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <div class="number">4.9</div>
+                    <div class="label">Rating</div>
+                </div>
+            </div>
+
+            <div class="team-section">
+                <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Our Leadership</h2>
+                <p style="color: var(--text-secondary);">Meet the team behind our success</p>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="https://avatar.iran.liara.run/public/1" alt="CEO">
+                        <h3>Arman Khan</h3>
+                        <p>Founder & CEO</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="https://avatar.iran.liara.run/public/2" alt="CTO">
+                        <h3>Tech Lead</h3>
+                        <p>Chief Technology Officer</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="https://avatar.iran.liara.run/public/3" alt="HR">
+                        <h3>HR Manager</h3>
+                        <p>Human Resources</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
