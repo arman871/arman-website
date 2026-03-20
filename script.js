@@ -1,3 +1,93 @@
+// ==================== DATA STORAGE SYSTEM ====================
+// LocalStorage based data persistence for Arman Technologies
+
+const DB_NAME = 'arman_tech_db';
+const DB_VERSION = 1;
+
+// Initialize database
+function initDB() {
+    const stores = {
+        contacts: [],
+        payments: [],
+        certificates: [],
+        lors: [],
+        offers: [],
+        enrollments: []
+    };
+    
+    if (!localStorage.getItem(DB_NAME)) {
+        localStorage.setItem(DB_NAME, JSON.stringify(stores));
+        console.log('✅ Database initialized');
+    }
+}
+
+// Save data
+function saveData(store, data) {
+    const db = JSON.parse(localStorage.getItem(DB_NAME));
+    data.id = Date.now();
+    data.createdAt = new Date().toISOString();
+    db[store].push(data);
+    localStorage.setItem(DB_NAME, JSON.stringify(db));
+    return data;
+}
+
+// Get all data from store
+function getData(store) {
+    const db = JSON.parse(localStorage.getItem(DB_NAME));
+    return db[store] || [];
+}
+
+// Get single item by ID
+function getDataById(store, id) {
+    const db = JSON.parse(localStorage.getItem(DB_NAME));
+    return db[store].find(item => item.id === id);
+}
+
+// Delete data
+function deleteData(store, id) {
+    const db = JSON.parse(localStorage.getItem(DB_NAME));
+    db[store] = db[store].filter(item => item.id !== id);
+    localStorage.setItem(DB_NAME, JSON.stringify(db));
+    return true;
+}
+
+// Export all data
+function exportData() {
+    const db = JSON.parse(localStorage.getItem(DB_NAME));
+    const blob = new Blob([JSON.stringify(db, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `arman_data_backup_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// Import data
+function importData(jsonData) {
+    try {
+        const data = JSON.parse(jsonData);
+        localStorage.setItem(DB_NAME, JSON.stringify(data));
+        return true;
+    } catch (e) {
+        console.error('Import failed:', e);
+        return false;
+    }
+}
+
+// Clear all data
+function clearAllData() {
+    if (confirm('Are you sure you want to delete all data? This cannot be undone!')) {
+        localStorage.removeItem(DB_NAME);
+        initDB();
+        alert('All data cleared!');
+    }
+}
+
+// Initialize on load
+initDB();
+console.log('💾 Data Storage System Ready');
+
 // ==================== MOBILE MENU ====================
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
@@ -64,7 +154,6 @@ const animateCounter = (element) => {
     }, 16);
 };
 
-// Intersection Observer for counter animation
 const observerOptions = {
     threshold: 0.5,
     rootMargin: '0px'
@@ -83,7 +172,7 @@ statNumbers.forEach(stat => {
     counterObserver.observe(stat);
 });
 
-// ==================== SMOOTH SCROLL FOR ANCHOR LINKS ====================
+// ==================== SMOOTH SCROLL ====================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -100,11 +189,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ==================== CONTACT FORM ====================
+// ==================== CONTACT FORM - WITH DATA SAVE ====================
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    
+    const formData = {
+        name: e.target.querySelector('input[type="text"]').value,
+        email: e.target.querySelector('input[type="email"]').value,
+        phone: e.target.querySelector('input[type="tel"]').value,
+        program: e.target.querySelector('select').value,
+        message: e.target.querySelector('textarea').value
+    };
+    
+    // Save to database
+    saveData('contacts', formData);
     
     const submitBtn = contactForm.querySelector('.btn-submit');
     const originalText = submitBtn.innerHTML;
@@ -117,6 +217,8 @@ contactForm.addEventListener('submit', (e) => {
         submitBtn.style.background = '';
         contactForm.reset();
     }, 3000);
+    
+    alert('✅ Message saved successfully!');
 });
 
 // ==================== NEWSLETTER FORM ====================
@@ -126,7 +228,9 @@ if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        const input = newsletterForm.querySelector('input');
+        const email = newsletterForm.querySelector('input').value;
+        saveData('newsletter', { email });
+        
         const button = newsletterForm.querySelector('button');
         const originalIcon = button.innerHTML;
         
@@ -136,7 +240,7 @@ if (newsletterForm) {
         setTimeout(() => {
             button.innerHTML = originalIcon;
             button.style.background = '';
-            input.value = '';
+            newsletterForm.reset();
         }, 2000);
     });
 }
@@ -161,19 +265,21 @@ tabBtns.forEach(btn => {
     });
 });
 
-// ==================== PDF GENERATION ====================
+// ==================== PDF GENERATION - WITH DATA SAVE ====================
 const { jsPDF } = window.jspdf;
 
 // Generate Certificate
 document.getElementById('generateCertificate')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const name = document.getElementById('certName').value;
-    const course = document.getElementById('certCourse').value;
-    const duration = document.getElementById('certDuration').value;
-    const date = document.getElementById('certDate').value;
-    const regId = document.getElementById('certId').value;
-    const grade = document.getElementById('certGrade').value;
+    const certData = {
+        name: document.getElementById('certName').value,
+        course: document.getElementById('certCourse').value,
+        duration: document.getElementById('certDuration').value,
+        date: document.getElementById('certDate').value,
+        regId: document.getElementById('certId').value,
+        grade: document.getElementById('certGrade').value
+    };
     
     const doc = new jsPDF({
         orientation: 'landscape',
@@ -220,7 +326,7 @@ document.getElementById('generateCertificate')?.addEventListener('submit', funct
     doc.setFont('times', 'bolditalic');
     doc.setFontSize(32);
     doc.setTextColor(0, 0, 0);
-    doc.text(name, 148.5, 100, { align: 'center' });
+    doc.text(certData.name, 148.5, 100, { align: 'center' });
     
     // Course details
     doc.setFont('helvetica', 'normal');
@@ -231,17 +337,17 @@ document.getElementById('generateCertificate')?.addEventListener('submit', funct
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
     doc.setTextColor(37, 99, 235);
-    doc.text(course, 148.5, 128, { align: 'center' });
+    doc.text(certData.course, 148.5, 128, { align: 'center' });
     
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(14);
     doc.setTextColor(80, 80, 80);
-    doc.text(`for ${duration} months with ${grade} performance.`, 148.5, 143, { align: 'center' });
+    doc.text(`for ${certData.duration} months with ${certData.grade} performance.`, 148.5, 143, { align: 'center' });
     
     // Date and ID
     doc.setFontSize(12);
-    doc.text(`Registration ID: ${regId}`, 148.5, 160, { align: 'center' });
-    doc.text(`Date: ${date}`, 148.5, 168, { align: 'center' });
+    doc.text(`Registration ID: ${certData.regId}`, 148.5, 160, { align: 'center' });
+    doc.text(`Date: ${certData.date}`, 148.5, 168, { align: 'center' });
     
     // Signatures
     doc.line(40, 185, 100, 185);
@@ -255,13 +361,15 @@ document.getElementById('generateCertificate')?.addEventListener('submit', funct
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     doc.setTextColor(37, 99, 235);
-    doc.text('AIVONEX TECHNOLOGIES', 148.5, 200, { align: 'center' });
+    doc.text('ARMAN TECHNOLOGIES', 148.5, 200, { align: 'center' });
     
     // Save PDF
-    doc.save(`Certificate_${name.replace(/\s+/g, '_')}.pdf`);
+    doc.save(`Certificate_${certData.name.replace(/\s+/g, '_')}.pdf`);
     
-    // Show success message
-    alert('Certificate generated successfully! 🎉');
+    // Save to database
+    saveData('certificates', certData);
+    
+    alert('✅ Certificate generated and saved!');
     this.reset();
 });
 
@@ -269,12 +377,14 @@ document.getElementById('generateCertificate')?.addEventListener('submit', funct
 document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const name = document.getElementById('lorName').value;
-    const course = document.getElementById('lorCourse').value;
-    const duration = document.getElementById('lorDuration').value;
-    const date = document.getElementById('lorDate').value;
-    const regId = document.getElementById('lorId').value;
-    const purpose = document.getElementById('lorPurpose').value;
+    const lorData = {
+        name: document.getElementById('lorName').value,
+        course: document.getElementById('lorCourse').value,
+        duration: document.getElementById('lorDuration').value,
+        date: document.getElementById('lorDate').value,
+        regId: document.getElementById('lorId').value,
+        purpose: document.getElementById('lorPurpose').value
+    };
     
     const doc = new jsPDF({
         orientation: 'portrait',
@@ -289,7 +399,7 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(20);
-    doc.text('AIVONEX TECHNOLOGIES', 105, 15, { align: 'center' });
+    doc.text('ARMAN TECHNOLOGIES', 105, 15, { align: 'center' });
     doc.setFontSize(10);
     doc.text('Letter of Recommendation', 105, 24, { align: 'center' });
     
@@ -301,7 +411,7 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     let y = 50;
     const lineHeight = 8;
     
-    doc.text('Date: ' + date, 20, y);
+    doc.text('Date: ' + lorData.date, 20, y);
     y += lineHeight * 2;
     
     doc.text('To Whom It May Concern,', 20, y);
@@ -313,13 +423,13 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     y += lineHeight;
     
     doc.setFont('times', 'bold');
-    doc.text(name, 20, y);
+    doc.text(lorData.name, 20, y);
     y += lineHeight;
     
     doc.setFont('times', 'normal');
-    doc.text(`who has successfully completed an internship program with us in ${course}`, 20, y);
+    doc.text(`who has successfully completed an internship program with us in ${lorData.course}`, 20, y);
     y += lineHeight;
-    doc.text(`for a duration of ${duration} months.`, 20, y);
+    doc.text(`for a duration of ${lorData.duration} months.`, 20, y);
     y += lineHeight * 2;
     
     doc.text('During their tenure with us, they demonstrated exceptional skills in:', 20, y);
@@ -336,9 +446,9 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     });
     
     y += lineHeight;
-    doc.text(`We believe that ${name} will be a valuable asset to any organization and`, 20, y);
+    doc.text(`We believe that ${lorData.name} will be a valuable asset to any organization and`, 20, y);
     y += lineHeight;
-    doc.text('highly recommend them for ' + purpose + '.', 20, y);
+    doc.text('highly recommend them for ' + lorData.purpose + '.', 20, y);
     y += lineHeight * 2;
     
     doc.text('Should you require any further information, please feel free to contact us.', 20, y);
@@ -351,20 +461,23 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     doc.setFontSize(10);
     doc.text('Director', 60, y + 5);
     doc.setFontSize(12);
-    doc.text('Aivonex Technologies', 60, y + 10);
+    doc.text('Arman Technologies', 60, y + 10);
     
     // Footer
     doc.setFillColor(37, 99, 235);
     doc.rect(0, 280, 210, 20, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(9);
-    doc.text('Registration ID: ' + regId, 105, 288, { align: 'center' });
-    doc.text('Email: aivonextechnologie@gmail.com | Phone: +91 73079 67581', 105, 294, { align: 'center' });
+    doc.text('Registration ID: ' + lorData.regId, 105, 288, { align: 'center' });
+    doc.text('Email: arman@gmail.com | Phone: +91 73079 67581', 105, 294, { align: 'center' });
     
     // Save PDF
-    doc.save(`LOR_${name.replace(/\s+/g, '_')}.pdf`);
+    doc.save(`LOR_${lorData.name.replace(/\s+/g, '_')}.pdf`);
     
-    alert('LOR generated successfully! 🎉');
+    // Save to database
+    saveData('lors', lorData);
+    
+    alert('✅ LOR generated and saved!');
     this.reset();
 });
 
@@ -372,12 +485,14 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
 document.getElementById('generateOffer')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const name = document.getElementById('offerName').value;
-    const role = document.getElementById('offerRole').value;
-    const stipend = document.getElementById('offerStipend').value;
-    const startDate = document.getElementById('offerStartDate').value;
-    const duration = document.getElementById('offerDuration').value;
-    const offerDate = document.getElementById('offerDate').value;
+    const offerData = {
+        name: document.getElementById('offerName').value,
+        role: document.getElementById('offerRole').value,
+        stipend: document.getElementById('offerStipend').value,
+        startDate: document.getElementById('offerStartDate').value,
+        duration: document.getElementById('offerDuration').value,
+        offerDate: document.getElementById('offerDate').value
+    };
     
     const doc = new jsPDF({
         orientation: 'portrait',
@@ -395,7 +510,7 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(24);
-    doc.text('AIVONEX TECHNOLOGIES', 105, 18, { align: 'center' });
+    doc.text('ARMAN TECHNOLOGIES', 105, 18, { align: 'center' });
     doc.setFontSize(12);
     doc.text('OFFER LETTER', 105, 28, { align: 'center' });
     doc.setFontSize(9);
@@ -409,15 +524,15 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     let y = 60;
     const lineHeight = 8;
     
-    doc.text('Date: ' + offerDate, 20, y);
+    doc.text('Date: ' + offerData.offerDate, 20, y);
     y += lineHeight * 2;
     
-    doc.text('Dear ' + name + ',', 20, y);
+    doc.text('Dear ' + offerData.name + ',', 20, y);
     y += lineHeight * 2;
     
-    doc.text('We are pleased to offer you an internship position at Aivonex Technologies', 20, y);
+    doc.text('We are pleased to offer you an internship position at Arman Technologies', 20, y);
     y += lineHeight;
-    doc.text('as a ' + role + '. We were impressed with your skills and believe you will', 20, y);
+    doc.text('as a ' + offerData.role + '. We were impressed with your skills and believe you will', 20, y);
     y += lineHeight;
     doc.text('be a valuable addition to our team.', 20, y);
     y += lineHeight * 2;
@@ -428,10 +543,10 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     
     doc.setFont('helvetica', 'normal');
     const details = [
-        `Position: ${role}`,
-        `Duration: ${duration} months`,
-        `Start Date: ${startDate}`,
-        `Stipend: ₹${stipend}/month`,
+        `Position: ${offerData.role}`,
+        `Duration: ${offerData.duration} months`,
+        `Start Date: ${offerData.startDate}`,
+        `Stipend: ₹${offerData.stipend}/month`,
         `Location: Bangalore (Hybrid)`,
         `Reporting Manager: Project Lead`
     ];
@@ -470,7 +585,7 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     doc.setFontSize(10);
     doc.text('HR Director', 60, y + 5);
     doc.setFontSize(12);
-    doc.text('Aivonex Technologies', 60, y + 10);
+    doc.text('Arman Technologies', 60, y + 10);
     
     // Terms section
     y += lineHeight * 3;
@@ -499,21 +614,27 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     doc.rect(0, 280, 210, 20, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(9);
-    doc.text('Aivonex Technologies | aivonextechnologie@gmail.com | +91 73079 67581', 105, 288, { align: 'center' });
+    doc.text('Arman Technologies | arman@gmail.com | +91 73079 67581', 105, 288, { align: 'center' });
     doc.text('This is a computer-generated document. No signature required.', 105, 294, { align: 'center' });
     
     // Save PDF
-    doc.save(`OfferLetter_${name.replace(/\s+/g, '_')}.pdf`);
+    doc.save(`OfferLetter_${offerData.name.replace(/\s+/g, '_')}.pdf`);
     
-    alert('Offer Letter generated successfully! 🎉');
+    // Save to database
+    saveData('offers', offerData);
+    
+    alert('✅ Offer Letter generated and saved!');
     this.reset();
 });
 
-// ==================== PAYMENT MODAL ====================
+// ==================== PAYMENT MODAL - WITH DATA SAVE ====================
 function showPaymentModal(method) {
     const modal = document.getElementById('paymentModal');
     modal.classList.add('active');
+    currentPaymentMethod = method;
 }
+
+let currentPaymentMethod = 'UPI';
 
 // Close modal
 document.querySelector('.modal-close')?.addEventListener('click', () => {
@@ -531,6 +652,16 @@ document.getElementById('paymentModal')?.addEventListener('click', (e) => {
 document.getElementById('paymentConfirmForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     
+    const paymentData = {
+        method: currentPaymentMethod,
+        transactionId: e.target.querySelector('input[type="text"]').value,
+        amount: e.target.querySelector('input[type="number"]').value,
+        date: e.target.querySelector('input[type="date"]').value
+    };
+    
+    // Save to database
+    saveData('payments', paymentData);
+    
     const submitBtn = e.target.querySelector('.btn-submit');
     const originalText = submitBtn.textContent;
     
@@ -547,6 +678,7 @@ document.getElementById('paymentConfirmForm')?.addEventListener('submit', (e) =>
             submitBtn.disabled = false;
             submitBtn.style.background = '';
             e.target.reset();
+            alert('✅ Payment details saved! We will verify shortly.');
         }, 2000);
     }, 1500);
 });
@@ -555,6 +687,12 @@ document.getElementById('paymentConfirmForm')?.addEventListener('submit', (e) =>
 document.getElementById('cardForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     
+    const paymentData = {
+        method: 'Card',
+        cardNumber: e.target.querySelector('input[placeholder="Card Number"]').value,
+        amount: 99
+    };
+    
     const btn = e.target.querySelector('.btn-pay');
     const originalText = btn.innerHTML;
     
@@ -562,6 +700,9 @@ document.getElementById('cardForm')?.addEventListener('submit', (e) => {
     btn.disabled = true;
     
     setTimeout(() => {
+        // Save payment
+        saveData('payments', paymentData);
+        
         btn.innerHTML = '<i class="fas fa-check"></i> Payment Successful!';
         btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
         
@@ -574,7 +715,7 @@ document.getElementById('cardForm')?.addEventListener('submit', (e) => {
     }, 2000);
 });
 
-// ==================== INTERSECTION OBSERVER FOR FADE-IN ====================
+// ==================== INTERSECTION OBSERVER ====================
 const fadeElements = document.querySelectorAll('.service-card, .internship-card, .course-card, .mv-card, .payment-card');
 
 const fadeObserver = new IntersectionObserver((entries) => {
@@ -597,7 +738,7 @@ fadeElements.forEach(el => {
     fadeObserver.observe(el);
 });
 
-// ==================== ACTIVE NAV LINK ON SCROLL ====================
+// ==================== ACTIVE NAV LINK ====================
 const sections = document.querySelectorAll('section[id]');
 
 window.addEventListener('scroll', () => {
@@ -619,7 +760,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// ==================== PARALLAX EFFECT FOR HERO ====================
+// ==================== PARALLAX EFFECT ====================
 const hero = document.querySelector('.hero');
 const heroContent = document.querySelector('.hero-content');
 
@@ -631,7 +772,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ==================== RIPPLE EFFECT FOR BUTTONS ====================
+// ==================== RIPPLE EFFECT ====================
 const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-enroll, .btn-submit, .btn-course, .btn-pay, .btn-generate');
 
 buttons.forEach(btn => {
@@ -663,7 +804,6 @@ buttons.forEach(btn => {
     });
 });
 
-// Add ripple animation
 const rippleStyle = document.createElement('style');
 rippleStyle.textContent = `
     @keyframes ripple {
@@ -675,19 +815,78 @@ rippleStyle.textContent = `
 `;
 document.head.appendChild(rippleStyle);
 
+// ==================== ADMIN PANEL (Data View) ====================
+// Press 'A' key to open admin panel
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'a' && e.ctrlKey) {
+        e.preventDefault();
+        showAdminPanel();
+    }
+});
+
+function showAdminPanel() {
+    const db = JSON.parse(localStorage.getItem(DB_NAME));
+    let html = `
+        <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;padding:20px;overflow:auto;">
+            <div style="max-width:1200px;margin:0 auto;background:#1a1a2e;color:#fff;padding:30px;border-radius:15px;">
+                <h1 style="color:#00d4ff;">📊 Arman Technologies - Admin Dashboard</h1>
+                <p>Press ESC or click X to close</p>
+                <button onclick="this.closest('div[style*=fixed]').remove()" style="position:absolute;top:20px;right:20px;padding:10px 20px;background:#ff4757;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
+                
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:30px 0;">
+                    <div style="background:#16213e;padding:20px;border-radius:10px;">
+                        <h3 style="color:#00d4ff;">📝 Contacts</h3>
+                        <p style="font-size:2rem;">${db.contacts?.length || 0}</p>
+                    </div>
+                    <div style="background:#16213e;padding:20px;border-radius:10px;">
+                        <h3 style="color:#00d4ff;">💰 Payments</h3>
+                        <p style="font-size:2rem;">${db.payments?.length || 0}</p>
+                    </div>
+                    <div style="background:#16213e;padding:20px;border-radius:10px;">
+                        <h3 style="color:#00d4ff;">📜 Certificates</h3>
+                        <p style="font-size:2rem;">${db.certificates?.length || 0}</p>
+                    </div>
+                    <div style="background:#16213e;padding:20px;border-radius:10px;">
+                        <h3 style="color:#00d4ff;">📄 LORs</h3>
+                        <p style="font-size:2rem;">${db.lors?.length || 0}</p>
+                    </div>
+                    <div style="background:#16213e;padding:20px;border-radius:10px;">
+                        <h3 style="color:#00d4ff;">💼 Offers</h3>
+                        <p style="font-size:2rem;">${db.offers?.length || 0}</p>
+                    </div>
+                </div>
+                
+                <div style="margin:20px 0;">
+                    <button onclick="exportData()" style="padding:10px 20px;background:#00d4ff;color:#000;border:none;border-radius:8px;cursor:pointer;margin-right:10px;">📥 Export Data</button>
+                    <button onclick="clearAllData()" style="padding:10px 20px;background:#ff4757;color:#fff;border:none;border-radius:8px;cursor:pointer;">🗑️ Clear All Data</button>
+                </div>
+                
+                <div style="margin-top:30px;">
+                    <h2>All Data (JSON)</h2>
+                    <pre style="background:#0f0f23;padding:20px;border-radius:10px;overflow:auto;max-height:400px;">${JSON.stringify(db, null, 2)}</pre>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', html);
+}
+
 // ==================== CONSOLE EASTER EGG ====================
 console.log(`
 ╔═══════════════════════════════════════════════════════╗
 ║                                                       ║
-║   🚀 Aivonex Technologies                             ║
+║   🚀 Arman Technologies                               ║
 ║   Empowering Students & Businesses                    ║
 ║                                                       ║
 ║   📞 Student Helpline: +91 73079 67581               ║
-║   📧 aivonextechnologie@gmail.com                    ║
+║   📧 arman@gmail.com                                  ║
 ║                                                       ║
 ║   Built with ❤️ for India                           ║
 ║                                                       ║
 ╚═══════════════════════════════════════════════════════╝
+
+💾 Data Storage: Active
+📊 Admin Panel: Press Ctrl+A
 `);
 
-console.log('✅ Aivonex Website Loaded Successfully!');
+console.log('✅ Arman Technologies Website Loaded Successfully!');
