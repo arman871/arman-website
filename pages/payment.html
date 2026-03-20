@@ -298,89 +298,121 @@
 
     <script>
         // Razorpay Configuration
-        const RAZORPAY_KEY_ID = 'rzp_test_YOUR_KEY_ID'; // Replace with your Razorpay Key ID
-        const AMOUNT = 117; // Amount in INR
+        const RAZORPAY_KEY_ID = 'rzp_test_sExMderkc2zvof';
+        const AMOUNT = 49; // Starting amount in INR
 
         function initiateRazorpay(method) {
-            const form = document.getElementById('razorpayForm');
-            form.classList.add('active');
+            // Validate form first
+            const name = document.getElementById('payerName').value;
+            const email = document.getElementById('payerEmail').value;
+            const phone = document.getElementById('payerPhone').value;
+            const course = document.getElementById('payerCourse').value;
             
-            // Scroll to form
-            form.scrollIntoView({ behavior: 'smooth' });
+            if (!name || !email || !phone || !course) {
+                alert('⚠️ Please fill in all your details first!');
+                document.getElementById('razorpayForm').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
             
-            // After user fills details, they can click pay
-            setTimeout(() => {
-                const options = {
-                    "key": RAZORPAY_KEY_ID,
-                    "amount": AMOUNT * 100, // Amount in paise
-                    "currency": "INR",
-                    "name": "Aivonex Technologies",
-                    "description": "Internship Program Payment",
-                    "image": "https://avatar.iran.liara.run/public",
-                    "handler": function(response) {
-                        handlePaymentSuccess(response, method);
-                    },
-                    "prefill": {
-                        "name": document.getElementById('payerName').value,
-                        "email": document.getElementById('payerEmail').value,
-                        "contact": document.getElementById('payerPhone').value
-                    },
-                    "theme": {
-                        "color": "#528ff0"
-                    },
-                    "method": {
-                        "upi": method === 'upi',
-                        "card": method === 'card',
-                        "netbanking": method === 'netbanking',
-                        "emi": method === 'emi'
-                    }
-                };
-                
-                const rzp = new Razorpay(options);
-                rzp.on('payment.failed', function(response) {
-                    alert('Payment Failed: ' + response.error.description);
-                });
-                rzp.open();
-            }, 1000);
+            const options = {
+                "key": RAZORPAY_KEY_ID,
+                "amount": AMOUNT * 100, // Amount in paise
+                "currency": "INR",
+                "name": "Aivonex Technologies",
+                "description": "Internship Program Payment",
+                "image": "https://avatar.iran.liara.run/public",
+                "handler": function(response) {
+                    handlePaymentSuccess(response, method);
+                },
+                "prefill": {
+                    "name": name,
+                    "email": email,
+                    "contact": phone
+                },
+                "theme": {
+                    "color": "#0284c7"
+                },
+                "method": {
+                    "upi": true,
+                    "card": true,
+                    "netbanking": true,
+                    "emi": true,
+                    "wallet": true
+                }
+            };
+            
+            const rzp = new Razorpay(options);
+            
+            rzp.on('payment.failed', function(response) {
+                alert(`❌ Payment Failed!\n\nError: ${response.error.description}`);
+            });
+            
+            rzp.open();
         }
 
         function handlePaymentSuccess(response, method) {
-            // Save payment data
+            const name = document.getElementById('payerName').value;
+            const email = document.getElementById('payerEmail').value;
+            const phone = document.getElementById('payerPhone').value;
+            const course = document.getElementById('payerCourse').value;
+            
             const paymentData = {
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_signature: response.razorpay_signature,
                 method: method,
                 amount: AMOUNT,
-                name: document.getElementById('payerName').value,
-                email: document.getElementById('payerEmail').value,
-                phone: document.getElementById('payerPhone').value,
-                course: document.getElementById('payerCourse').value,
+                name: name,
+                email: email,
+                phone: phone,
+                course: course,
+                status: 'success',
                 date: new Date().toISOString()
             };
             
-            // Save to localStorage
-            const payments = JSON.parse(localStorage.getItem('arman_payments') || '[]');
+            const payments = JSON.parse(localStorage.getItem('aivonex_payments') || '[]');
             payments.push(paymentData);
-            localStorage.setItem('arman_payments', JSON.stringify(payments));
+            localStorage.setItem('aivonex_payments', JSON.stringify(payments));
             
-            // Show success message
-            alert('✅ Payment Successful!\n\nPayment ID: ' + response.razorpay_payment_id + '\n\nWe will contact you shortly.');
+            const enrollments = JSON.parse(localStorage.getItem('aivonex_enrollments') || '[]');
+            enrollments.push({
+                email: email,
+                course: course,
+                paymentId: response.razorpay_payment_id,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('aivonex_enrollments', JSON.stringify(enrollments));
             
-            // Redirect to success page or home
-            window.location.href = '../index.html#contact';
+            alert(`✅ Payment Successful!\n\n🎉 Thank you, ${name}!\n\nPayment ID: ${response.razorpay_payment_id}\nCourse: ${course}\n\nWe will contact you shortly!`);
+            
+            window.location.href = 'dashboard.html';
         }
 
+        // Auto-fill from logged in user
+        const currentUser = JSON.parse(localStorage.getItem('aivonex_current_user'));
+        if (currentUser) {
+            if (!document.getElementById('payerName').value) {
+                document.getElementById('payerName').value = currentUser.firstName + ' ' + currentUser.lastName;
+            }
+            if (!document.getElementById('payerEmail').value) {
+                document.getElementById('payerEmail').value = currentUser.email;
+            }
+            if (!document.getElementById('payerPhone').value && currentUser.phone) {
+                document.getElementById('payerPhone').value = currentUser.phone;
+            }
+        }
+        
         // Save form data when user types
         ['payerName', 'payerEmail', 'payerPhone', 'payerCourse'].forEach(id => {
-            document.getElementById(id).addEventListener('input', function() {
-                localStorage.setItem('arman_payer_' + id, this.value);
-            });
-            
-            // Load saved data
-            const saved = localStorage.getItem('arman_payer_' + id);
-            if (saved) {
-                document.getElementById(id).value = saved;
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', function() {
+                    localStorage.setItem('aivonex_payer_' + id, this.value);
+                });
+                const saved = localStorage.getItem('aivonex_payer_' + id);
+                if (saved && !element.value) {
+                    element.value = saved;
+                }
             }
         });
     </script>
