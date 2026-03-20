@@ -1,5 +1,5 @@
 // ==================== DATA STORAGE SYSTEM ====================
-// LocalStorage based data persistence for Arman Khan
+// LocalStorage based data persistence for Aivonex Technologies
 
 const DB_NAME = 'arman_tech_db';
 const DB_VERSION = 1;
@@ -361,7 +361,7 @@ document.getElementById('generateCertificate')?.addEventListener('submit', funct
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     doc.setTextColor(37, 99, 235);
-    doc.text('ARMAN KHAN', 148.5, 200, { align: 'center' });
+    doc.text('AIVONEX TECHNOLOGIES', 148.5, 200, { align: 'center' });
     
     // Save PDF
     doc.save(`Certificate_${certData.name.replace(/\s+/g, '_')}.pdf`);
@@ -399,7 +399,7 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(20);
-    doc.text('ARMAN KHAN', 105, 15, { align: 'center' });
+    doc.text('AIVONEX TECHNOLOGIES', 105, 15, { align: 'center' });
     doc.setFontSize(10);
     doc.text('Letter of Recommendation', 105, 24, { align: 'center' });
     
@@ -461,7 +461,7 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     doc.setFontSize(10);
     doc.text('Director', 60, y + 5);
     doc.setFontSize(12);
-    doc.text('Arman Khan', 60, y + 10);
+    doc.text('Aivonex Technologies', 60, y + 10);
     
     // Footer
     doc.setFillColor(37, 99, 235);
@@ -469,7 +469,7 @@ document.getElementById('generateLOR')?.addEventListener('submit', function(e) {
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(9);
     doc.text('Registration ID: ' + lorData.regId, 105, 288, { align: 'center' });
-    doc.text('Email: armankhan@gmail.com | Phone: +91 73079 67581', 105, 294, { align: 'center' });
+    doc.text('Email: aivonextechnologie@gmail.com | Phone: +91 73079 67581', 105, 294, { align: 'center' });
     
     // Save PDF
     doc.save(`LOR_${lorData.name.replace(/\s+/g, '_')}.pdf`);
@@ -510,7 +510,7 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(24);
-    doc.text('ARMAN KHAN', 105, 18, { align: 'center' });
+    doc.text('AIVONEX TECHNOLOGIES', 105, 18, { align: 'center' });
     doc.setFontSize(12);
     doc.text('OFFER LETTER', 105, 28, { align: 'center' });
     doc.setFontSize(9);
@@ -530,7 +530,7 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     doc.text('Dear ' + offerData.name + ',', 20, y);
     y += lineHeight * 2;
     
-    doc.text('We are pleased to offer you an internship position at Arman Khan', 20, y);
+    doc.text('We are pleased to offer you an internship position at Aivonex Technologies', 20, y);
     y += lineHeight;
     doc.text('as a ' + offerData.role + '. We were impressed with your skills and believe you will', 20, y);
     y += lineHeight;
@@ -585,7 +585,7 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     doc.setFontSize(10);
     doc.text('HR Director', 60, y + 5);
     doc.setFontSize(12);
-    doc.text('Arman Khan', 60, y + 10);
+    doc.text('Aivonex Technologies', 60, y + 10);
     
     // Terms section
     y += lineHeight * 3;
@@ -614,7 +614,7 @@ document.getElementById('generateOffer')?.addEventListener('submit', function(e)
     doc.rect(0, 280, 210, 20, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(9);
-    doc.text('Arman Khan | armankhan@gmail.com | +91 73079 67581', 105, 288, { align: 'center' });
+    doc.text('Aivonex Technologies | aivonextechnologie@gmail.com | +91 73079 67581', 105, 288, { align: 'center' });
     doc.text('This is a computer-generated document. No signature required.', 105, 294, { align: 'center' });
     
     // Save PDF
@@ -829,7 +829,7 @@ function showAdminPanel() {
     let html = `
         <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;padding:20px;overflow:auto;">
             <div style="max-width:1200px;margin:0 auto;background:#1a1a2e;color:#fff;padding:30px;border-radius:15px;">
-                <h1 style="color:#00d4ff;">📊 Arman Khan - Admin Dashboard</h1>
+                <h1 style="color:#00d4ff;">📊 Aivonex Technologies - Admin Dashboard</h1>
                 <p>Press ESC or click X to close</p>
                 <button onclick="this.closest('div[style*=fixed]').remove()" style="position:absolute;top:20px;right:20px;padding:10px 20px;background:#ff4757;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:1.2rem;">✕</button>
                 
@@ -875,11 +875,11 @@ function showAdminPanel() {
 console.log(`
 ╔═══════════════════════════════════════════════════════╗
 ║                                                       ║
-║   🚀 Arman Khan                               ║
+║   🚀 Aivonex Technologies                               ║
 ║   Empowering Students & Businesses                    ║
 ║                                                       ║
 ║   📞 Student Helpline: +91 73079 67581               ║
-║   📧 armankhan@gmail.com                                  ║
+║   📧 aivonextechnologie@gmail.com                                  ║
 ║                                                       ║
 ║   Built with ❤️ for India                           ║
 ║                                                       ║
@@ -889,4 +889,4 @@ console.log(`
 📊 Admin Panel: Press Ctrl+A
 `);
 
-console.log('✅ Arman Khan Website Loaded Successfully!');
+console.log('✅ Aivonex Technologies Website Loaded Successfully!');
