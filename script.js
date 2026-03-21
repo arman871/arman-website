@@ -890,3 +890,20 @@ console.log(`
 `);
 
 console.log('✅ Aivonex Technologies Website Loaded Successfully!');
+const checkbox = document.getElementById('checkbox');
+
+// Purani preference check karna
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    checkbox.checked = true;
+}
+
+checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    }
+});
