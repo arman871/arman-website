@@ -1671,3 +1671,24 @@ body {
         align-items: center;
     }
 }
+/* Glassmorphism Card Style */
+.project-card {
+    background: rgba(255, 255, 255, 0.05); /* Slight white tint */
+    backdrop-filter: blur(10px); /* Blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px); /* Hover animation */
+    box-shadow: 0 10px 30px rgba(0, 115, 255, 0.3); /* Blue glow */
+}
+
+/* Background Gradient */
+body {
+    background: radial-gradient(circle at top right, #1a1a2e, #16213e, #0f3460);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
