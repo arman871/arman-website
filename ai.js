@@ -1,40 +1,9 @@
 const axios = require("axios");
 const fs = require("fs");
-const path = require("path");
 
 const prompt = process.env.PROMPT;
 
-// 📁 sare files read karega
-function getAllFiles(dir) {
-  let results = [];
-  const list = fs.readdirSync(dir);
-
-  list.forEach((file) => {
-    const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
-
-    if (stat && stat.isDirectory() && file !== ".git") {
-      results = results.concat(getAllFiles(filePath));
-    } else {
-      if (file.endsWith(".html") || file.endsWith(".css") || file.endsWith(".js")) {
-        results.push(filePath);
-      }
-    }
-  });
-
-  return results;
-}
-
 async function runAI() {
-  const files = getAllFiles(".");
-
-  let projectCode = "";
-
-  files.forEach((file) => {
-    const content = fs.readFileSync(file, "utf-8");
-    projectCode += `\nFILE: ${file}\n${content}\n`;
-  });
-
   const res = await axios.post(
     "https://openrouter.ai/api/v1/chat/completions",
     {
@@ -43,37 +12,37 @@ async function runAI() {
         {
           role: "system",
           content: `
-You are a professional web developer.
-User will give instruction.
-Update ALL project files.
+You are a web developer.
+Do NOT return full code.
 
-Return JSON like:
+Only return small updates like:
 {
-  "filename": "updated code"
+  "file": "index.html",
+  "content": "updated code"
 }
 `
         },
         {
           role: "user",
-          content: `PROJECT CODE:\n${projectCode}\n\nINSTRUCTION:\n${prompt}`
+          content: prompt
         }
       ]
     },
     {
       headers: {
-        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        Authorization: \`Bearer ${process.env.OPENROUTER_API_KEY}\`,
         "Content-Type": "application/json"
       }
     }
   );
 
-  const output = res.data.choices[0].message.content;
+  let output = res.data.choices[0].message.content;
 
-  const updatedFiles = JSON.parse(output);
+  output = output.replace(/```json/g, "").replace(/```/g, "").trim();
 
-  for (let file in updatedFiles) {
-    fs.writeFileSync(file, updatedFiles[file]);
-  }
+  const data = JSON.parse(output);
+
+  fs.writeFileSync(data.file, data.content);
 }
 
 runAI();
