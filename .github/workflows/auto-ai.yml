@@ -1,0 +1,38 @@
+name: AI Auto Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Enter AI instruction"
+        required: true
+
+jobs:
+  update-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install axios
+        run: npm install axios
+
+      - name: Run AI Script
+        run: node ai.js
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          PROMPT: ${{ github.event.inputs.prompt }}
+
+      - name: Commit & Push
+        run: |
+          git config user.name "AI Bot"
+          git config user.email "ai@bot.com"
+          git add .
+          git commit -m "AI update"
+          git push
